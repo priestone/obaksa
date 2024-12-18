@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { designFont } from "./GlobalStyled";
 
 const ShadowImage = styled.img`
   filter: brightness(0) contrast(1); /* 이미지를 까맣게 만듦 */
@@ -10,6 +11,11 @@ const ShadowImage = styled.img`
 const GameContainer = styled.div`
   text-align: center;
   margin-top: 50px;
+
+  h1 {
+    font-family: ${designFont.styleFont};
+    /* font-family: "galmuri"; */
+  }
 `;
 
 const Input = styled.input`

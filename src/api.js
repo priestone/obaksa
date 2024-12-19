@@ -7,7 +7,7 @@ const pokemonAPI = axios.create({
   },
 });
 
-export const getPokemonList = async (limit = 20, offset = 0) => {
+export const getPokemonList = async (limit = 151, offset = 0) => {
   try {
     const response = await pokemonAPI.get("pokemon", {
       params: { limit, offset },
@@ -19,12 +19,20 @@ export const getPokemonList = async (limit = 20, offset = 0) => {
   }
 };
 
-export const getPokemonDetails = async () => {
-  const response = await pokemonAPI.get(
-    `pokemon-species/bulbasaur?language=ko`
-  );
-  return response.data;
+export const getPokemonDetails = async (pokemonId) => {
+  try {
+    const response = await pokemonAPI.get(`pokemon-species/${pokemonId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching details for Pokémon ID ${pokemonId}:`, error);
+    throw error;
+  }
 };
+
+// export const getPokemonDetails = async (pokemonID) => {
+//   const response = await pokemonAPI.get(`pokemon-species/${pokemonID}`);
+//   return response.data;
+// };
 
 // https://pokeapi.co/api/v2/pokemon?offset=0&limit=20
 

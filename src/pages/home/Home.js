@@ -51,7 +51,7 @@ const Home = () => {
         const data = await getPokemonList(150, 0);
         const detaildata = await getPokemonDetails("");
         // console.log(data);
-        console.log(detaildata);
+        // console.log(detaildata);
       } catch (error) {
         console.log(error);
       }

@@ -45,20 +45,20 @@ const NextBtn2 = styled.div`
 `;
 
 const Home = () => {
-  useEffect(() => {
-    const fetchPokemons = async () => {
-      try {
-        const data = await getPokemonList(150, 0);
-        const detaildata = await getPokemonDetails("");
-        // console.log(data);
-        // console.log(detaildata);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPokemons = async () => {
+  //     try {
+  //       const data = await getPokemonList(150, 0);
+  //       const detaildata = await getPokemonDetails("");
+  //       // console.log(data);
+  //       // console.log(detaildata);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchPokemons();
-  }, []);
+  //   fetchPokemons();
+  // }, []);
 
   return (
     <Container>

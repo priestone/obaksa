@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { designFont } from "../../GlobalStyled";
 import { useEffect, useState } from "react";
-import { getPokemonDetails, getPokemonList } from "../../api";
+import { getPokemonSpecies, getPokemonData, getPokemonList } from "../../api";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -71,7 +71,6 @@ const Type = styled.div`
   span {
     width: 45%;
     border-radius: 4px;
-    background-color: ${(props) => props.color || "gray"};
     text-align: center;
     color: white;
     padding: 5px 0;
@@ -89,12 +88,15 @@ const List = () => {
 
         const details = await Promise.all(
           data.results.map(async (_, index) => {
-            const detail = await getPokemonDetails(index + 1);
-            return { id: index + 1, ...detail };
+            const id = index + 1;
+            const speciesDetail = await getPokemonSpecies(id);
+            const pokemonData = await getPokemonData(id);
+            return { id, ...speciesDetail, ...pokemonData };
           })
         );
 
         setPokemonList(data.results);
+
         const detailsMap = details.reduce((acc, detail) => {
           acc[detail.id] = detail;
           return acc;
@@ -141,8 +143,6 @@ const List = () => {
     return koreanNameObject ? koreanNameObject.name : "알 수 없음";
   };
 
-  console.log(pokemonList);
-
   return (
     <Container>
       <Link to={"/#"}>
@@ -173,7 +173,13 @@ const List = () => {
                       typeObj.type.name
                     );
                     return (
-                      <span key={i} color={color}>
+                      <span
+                        key={i}
+                        style={{
+                          backgroundColor: color,
+                          color: color === "yellow" ? "black" : "white",
+                        }}
+                      >
                         {translation}
                       </span>
                     );

@@ -19,21 +19,24 @@ export const getPokemonList = async (limit = 151, offset = 0) => {
   }
 };
 
-export const getPokemonDetails = async (pokemonId) => {
+// 종(species) 정보: 이름(한국어 명), 도감 설명 등
+export const getPokemonSpecies = async (pokemonId) => {
   try {
     const response = await pokemonAPI.get(`pokemon-species/${pokemonId}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching details for Pokémon ID ${pokemonId}:`, error);
+    console.error(`Error fetching species for Pokémon ID ${pokemonId}:`, error);
     throw error;
   }
 };
 
-// export const getPokemonDetails = async (pokemonID) => {
-//   const response = await pokemonAPI.get(`pokemon-species/${pokemonID}`);
-//   return response.data;
-// };
-
-// https://pokeapi.co/api/v2/pokemon?offset=0&limit=20
-
-// https://pokeapi.co/api/v2/pokemon-species/bulbasaur?language=ko
+// 실제 포켓몬 스탯, 타입, 특성 등의 데이터
+export const getPokemonData = async (pokemonId) => {
+  try {
+    const response = await pokemonAPI.get(`pokemon/${pokemonId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching data for Pokémon ID ${pokemonId}:`, error);
+    throw error;
+  }
+};

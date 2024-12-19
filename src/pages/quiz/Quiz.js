@@ -3,6 +3,8 @@ import userImg from "./imgs/userimg.png";
 import statusimg from "./imgs/statusimg.png";
 import poketballimg from "./imgs/poketballimg.png";
 import { useEffect, useState } from "react";
+import { designFont } from "../../GlobalStyled";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 440px;
@@ -26,12 +28,6 @@ const BattleWrap = styled.div`
   }
 `;
 
-const TextWrap = styled.div`
-  width: 100%;
-  height: 40%;
-  background-color: green;
-`;
-
 const PokemonImg = styled.div`
   width: 250px;
   position: absolute;
@@ -49,7 +45,7 @@ const UserImg = styled.div`
   width: 200px;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0%;
 `;
 const StatusWrap = styled.div`
   position: absolute;
@@ -75,6 +71,70 @@ const Ball = styled.div`
   img {
     width: 15%;
   }
+`;
+
+const TextWrap = styled.div`
+  width: 100%;
+  height: 40%;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const NoticeWrap = styled.div`
+  width: 95%;
+  height: 120px;
+  border-radius: 10px;
+  background-color: #dbdbdb;
+  padding: 5px;
+  margin-top: 10px;
+
+  h2 {
+    text-align: start;
+    line-height: 50px;
+    font-size: 24px;
+    font-family: ${designFont.styleFont};
+  }
+`;
+
+const Answer = styled.input`
+  all: unset;
+  width: 150px;
+  height: 40px;
+  border: 1px solid black;
+  margin-right: 10px;
+`;
+
+const ActionWrap = styled.div`
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+
+  a {
+    width: 46%;
+  }
+`;
+
+const Write = styled.div`
+  width: 46%;
+  height: 120px;
+  background-color: salmon;
+  text-align: center;
+  line-height: 120px;
+  font-size: 24px;
+  font-family: ${designFont.styleFont};
+`;
+
+const Runaway = styled.div`
+  /* width: 46%; */
+  height: 120px;
+  background-color: salmon;
+  text-align: center;
+  line-height: 120px;
+  font-size: 24px;
+  font-family: ${designFont.styleFont};
 `;
 
 const Quiz = () => {
@@ -127,7 +187,22 @@ const Quiz = () => {
           </BallWrap>
         </StatusWrap>
       </BattleWrap>
-      <TextWrap></TextWrap>
+      <TextWrap>
+        <NoticeWrap>
+          <h2>
+            앗! 야생의
+            <br></br>
+            <Answer></Answer>
+            (이)가 나타났다!
+          </h2>
+        </NoticeWrap>
+        <ActionWrap>
+          <Write>입력하기</Write>
+          <Link to={"/"}>
+            <Runaway>도망치기</Runaway>
+          </Link>
+        </ActionWrap>
+      </TextWrap>
     </Container>
   );
 };

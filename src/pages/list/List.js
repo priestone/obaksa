@@ -80,6 +80,7 @@ const Type = styled.div`
 const List = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState({});
+  const [searchPokemon, setSearchPokemon] = useState("");
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -149,7 +150,7 @@ const List = () => {
         <Logo>오박사</Logo>
       </Link>
       <SearchWrap>
-        <Search placeholder="포켓몬 검색하기" />
+        <Search placeholder="포켓몬 검색하기" value={searchPokemon} />
       </SearchWrap>
       <ConWrap>
         {pokemonList.map((pokemon, index) => {

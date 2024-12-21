@@ -13,9 +13,18 @@ const Container = styled.div`
   font-family: ${designFont.styleFont};
   text-align: center;
   padding: 100px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h1 {
     font-size: 30px;
+    margin-bottom: 50px;
+  }
+
+  a {
+    width: 200px;
+    height: 50px;
     margin-bottom: 50px;
   }
 `;
@@ -40,6 +49,9 @@ const Quizend = () => {
       <p>당신은 총 {score}개의 문제를 맞췄습니다!</p>
       <Link to={"/"}>
         <HomeBtn>홈으로</HomeBtn>
+      </Link>
+      <Link to={"/quiz"}>
+        <HomeBtn>다시하기</HomeBtn>
       </Link>
     </Container>
   );

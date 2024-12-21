@@ -95,11 +95,40 @@ const ModalBackdrop = styled.div`
 
 const ModalContainer = styled.div`
   /* 모달 내용(앞면) */
-  width: 300px;
+  width: 70%;
   background: #fff;
   border-radius: 8px;
   padding: 20px;
   position: relative;
+  font-family: ${designFont.styleFont};
+
+  img {
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 12px;
+    margin-top: 26px;
+  }
+
+  h2 {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+`;
+
+const Modalimg = styled.div`
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
 `;
 
 const CloseButton = styled.button`
@@ -221,6 +250,8 @@ const List = () => {
     setSelectedPokemon(null);
   };
 
+  console.log(pokemonDetails);
+
   return (
     <Container>
       <Link to={"/#"}>
@@ -282,12 +313,12 @@ const List = () => {
           */}
           <ModalContainer onClick={(e) => e.stopPropagation()}>
             <CloseButton onClick={handleCloseModal}>X</CloseButton>
-            <Conimg>
+            <Modalimg>
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`}
                 alt={getKoreanName(selectedPokemon.names)}
               />
-            </Conimg>
+            </Modalimg>
             <h1>No.{selectedPokemon.id}</h1>
             <h2>{getKoreanName(selectedPokemon.names)}</h2>
             <Type>

@@ -150,7 +150,7 @@ const NoticeWrap = styled.div`
 
 const Answer = styled.input`
   all: unset;
-  width: 150px;
+  width: 120px;
   height: 40px;
   border: 1px solid black;
   margin-right: 10px;
@@ -163,14 +163,14 @@ const ActionWrap = styled.div`
   justify-content: space-between;
   margin-top: 10px;
   a {
-    width: 49%;
+    width: 48%;
     border-radius: 10px;
     border: 2px solid black;
   }
 `;
 
 const Write = styled.div`
-  width: 49%;
+  width: 48%;
   height: 100px;
   background-color: #dbdbdb;
   text-align: center;

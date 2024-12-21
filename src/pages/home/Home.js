@@ -14,34 +14,43 @@ const Container = styled.div`
 `;
 
 const BtnWrap = styled.div`
+  width: 90%;
+  position: absolute;
+  left: 5%;
+  top: 50%;
   display: flex;
   justify-content: space-between;
+
+  a {
+    width: 48%;
+  }
 `;
 
 const NextBtn1 = styled.div`
-  width: 150px;
+  /* width: 150px; */
+  width: 100%;
   height: 150px;
   border-radius: 10px;
   background-color: salmon;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  /* position: absolute;
   left: 10%;
-  top: 50%;
+  top: 50%; */
 `;
 
 const NextBtn2 = styled.div`
-  width: 150px;
+  width: 100%;
   height: 150px;
   border-radius: 10px;
   background-color: salmon;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  /* position: absolute;
   right: 10%;
-  top: 50%;
+  top: 50%; */
 `;
 
 const Home = () => {
@@ -62,18 +71,18 @@ const Home = () => {
 
   return (
     <Container>
-      {/* <BtnWrap>
-      </BtnWrap> */}
-      <Link to={"/quiz"}>
-        <NextBtn1>
-          <h2>포켓몬퀴즈</h2>
-        </NextBtn1>
-      </Link>
-      <Link to={"/list"}>
-        <NextBtn2>
-          <h2>포켓몬도감</h2>
-        </NextBtn2>
-      </Link>
+      <BtnWrap>
+        <Link to={"/quiz"}>
+          <NextBtn1>
+            <h2>포켓몬퀴즈</h2>
+          </NextBtn1>
+        </Link>
+        <Link to={"/list"}>
+          <NextBtn2>
+            <h2>포켓몬도감</h2>
+          </NextBtn2>
+        </Link>
+      </BtnWrap>
     </Container>
   );
 };

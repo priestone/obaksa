@@ -4,6 +4,8 @@ import nunu1 from "./imgs/nunu1.png";
 import nunu2 from "./imgs/nunu2.png";
 import gos1 from "./imgs/gos1.png";
 import gos2 from "./imgs/gos2.png";
+import bg1 from "./imgs/bg1.png";
+import bg2 from "./imgs/bg2.png";
 
 const Container = styled.div`
   max-width: 440px;
@@ -16,6 +18,7 @@ const Container = styled.div`
   /* padding-top: 100px; */
 
   h1 {
+    width: 240px;
     position: absolute;
     top: 20%;
     left: 50%;
@@ -23,6 +26,7 @@ const Container = styled.div`
     font-size: 40px;
     font-weight: 900;
     text-align: center;
+    z-index: 990;
   }
 `;
 
@@ -44,26 +48,61 @@ const NextBtn1 = styled.div`
   width: 100%;
   height: 150px;
   border-radius: 10px;
-  background-color: salmon;
+  /* background-color: salmon; */
+  /* background: url(${bg1}) no-repeat center / cover; */
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 20;
   /* position: absolute;
   left: 10%;
   top: 50%; */
+  img {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 10;
+  }
+
+  h2 {
+    z-index: 11;
+    text-align: center;
+  }
 `;
 
 const NextBtn2 = styled.div`
   width: 100%;
   height: 150px;
   border-radius: 10px;
-  background-color: salmon;
+  /* background-color: salmon; */
+  /* background: url(${bg2}) no-repeat center / cover; */
   display: flex;
   align-items: center;
   justify-content: center;
   /* position: absolute;
   right: 10%;
   top: 50%; */
+  position: relative;
+  z-index: 20;
+  /* position: absolute;
+  left: 10%;
+  top: 50%; */
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 10;
+  }
+
+  h2 {
+    z-index: 11;
+    text-align: center;
+  }
 `;
 
 const Nunu = styled.div`
@@ -83,7 +122,7 @@ const nunuani = keyframes`
   bottom: 0px; 
   }
   100%{
-    bottom: -91px;
+    bottom: -100px;
   }
 `;
 
@@ -142,7 +181,7 @@ const Home = () => {
   return (
     <Container>
       <h1>
-        오박사의 <br></br> 연구소
+        오박사의 <br></br> 포켓몬 연구소
       </h1>
       <Nunu>
         <Img1 src={nunu1} alt="nunu1" />
@@ -155,12 +194,20 @@ const Home = () => {
       <BtnWrap>
         <Link to={"/quiz"}>
           <NextBtn1>
-            <h2>포켓몬퀴즈</h2>
+            <img src={bg1} alt="bg1" />
+            <h2>
+              포켓몬<br></br>
+              퀴즈
+            </h2>
           </NextBtn1>
         </Link>
         <Link to={"/list"}>
           <NextBtn2>
-            <h2>포켓몬도감</h2>
+            <img src={bg2} alt="bg2" />
+            <h2>
+              포켓몬
+              <br></br>도감
+            </h2>
           </NextBtn2>
         </Link>
       </BtnWrap>

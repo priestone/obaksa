@@ -47,7 +47,7 @@ const ConWrap = styled.div`
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
   row-gap: 20px;
-  grid-template-rows: repeat(5, 1fr);
+  /* grid-template-rows: repeat(5, 1fr); */
 `;
 
 const Con = styled.div`
@@ -69,6 +69,7 @@ const Conimg = styled.div`
   width: 100%;
   border-radius: 10px;
   background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 const Type = styled.div`
@@ -111,22 +112,33 @@ const ModalContainer = styled.div`
 
   img {
     width: 70%;
-    border: 1px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 20px;
   }
 
   h1 {
     font-size: 12px;
-    margin-top: 26px;
+    margin-top: 10px;
   }
 
   h2 {
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 18px;
+    margin-top: 10px;
   }
 
   p {
     margin: 10px 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  li {
+    margin-top: 10px;
   }
 `;
 
@@ -356,8 +368,6 @@ const List = () => {
                 alt={getKoreanName(selectedPokemon.names)}
               />
             </Modalimg>
-            <h1>No.{selectedPokemon.id}</h1>
-            <h2>{getKoreanName(selectedPokemon.names)}</h2>
             <Type>
               {selectedPokemon.types?.map((typeObj, i) => {
                 const { color, translation } = getPokemonTypeProperties(
@@ -376,11 +386,13 @@ const List = () => {
                 );
               })}
             </Type>
+            <h1>No.{selectedPokemon.id}</h1>
+            <h2>{getKoreanName(selectedPokemon.names)}</h2>
             <p>설명: {getKoreanFlavor(selectedPokemon.flavor_text_entries)}</p>
             <h3>특성</h3>
             <ul>
               {selectedPokemon.abilitiesKorean?.map((abi, idx) => (
-                <li key={idx}>{abi}</li>
+                <li key={idx}> - {abi}</li>
               ))}
             </ul>
           </ModalContainer>

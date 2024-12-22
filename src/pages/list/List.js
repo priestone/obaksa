@@ -1,8 +1,15 @@
 import styled from "styled-components";
 import { designFont } from "../../GlobalStyled";
 import { useEffect, useState } from "react";
-import { getPokemonSpecies, getPokemonData, getPokemonList } from "../../api";
+import {
+  getPokemonSpecies,
+  getPokemonData,
+  getPokemonList,
+  getKoreanAbilityName,
+  getAbilityData,
+} from "../../api";
 import { Link } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Container = styled.div`
   max-width: 440px;
@@ -193,28 +200,45 @@ const List = () => {
   const [searchPokemon, setSearchPokemon] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null); // 모달에 표시할 포켓몬
 
+  // List.jsx (일부)
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        // 1세대(151마리) 리스트
         const data = await getPokemonList(151, 0);
-        // 결과에 id 추가
         const updatedResults = data.results.map((p, i) => ({
           ...p,
           id: i + 1,
         }));
         setPokemonList(updatedResults);
 
-        // 각 포켓몬 상세정보 불러오기
+        // 각 포켓몬 상세정보 + ability 상세정보까지 불러오기
         const details = await Promise.all(
           updatedResults.map(async (pokemon) => {
+            // 1) 포켓몬의 speciesDetail, pokemonData 호출
             const speciesDetail = await getPokemonSpecies(pokemon.id);
             const pokemonData = await getPokemonData(pokemon.id);
-            return { id: pokemon.id, ...speciesDetail, ...pokemonData };
+
+            // 2) 포켓몬의 abilities 배열에서 ability url 추출 → 각각 호출
+            const abilitiesKorean = await Promise.all(
+              pokemonData.abilities.map(async (abilityObj) => {
+                // abilityObj.ability.url = https://pokeapi.co/api/v2/ability/65/ ...
+                const abilityData = await getAbilityData(
+                  abilityObj.ability.url
+                );
+                // abilityData.names에서 한국어 이름을 추출
+                return getKoreanAbilityName(abilityData.names);
+              })
+            );
+
+            return {
+              id: pokemon.id,
+              ...speciesDetail,
+              ...pokemonData,
+              abilitiesKorean, // ["심록", "엽록소"] 형태
+            };
           })
         );
 
-        // { 1: {...}, 2: {...}, ... } 형태로 변환
         const detailsMap = details.reduce((acc, detail) => {
           acc[detail.id] = detail;
           return acc;
@@ -252,6 +276,12 @@ const List = () => {
 
   console.log(pokemonDetails);
 
+  const fetchData = () => {
+    try {
+      // let page = (resultData.page += 1);
+    } catch (error) {}
+  };
+
   return (
     <Container>
       <Link to={"/#"}>
@@ -264,6 +294,13 @@ const List = () => {
           onChange={(e) => setSearchPokemon(e.target.value)}
         />
       </SearchWrap>
+      <InfiniteScroll
+        dataLength={pokemonList.length}
+        next={fetchData}
+        hasMore={true}
+      >
+        {console.log(pokemonList.length)}
+      </InfiniteScroll>
       <ConWrap>
         {filteredPokemonList.map((pokemon) => {
           const detail = pokemonDetails[pokemon.id];
@@ -340,6 +377,12 @@ const List = () => {
               })}
             </Type>
             <p>설명: {getKoreanFlavor(selectedPokemon.flavor_text_entries)}</p>
+            <h3>특성</h3>
+            <ul>
+              {selectedPokemon.abilitiesKorean?.map((abi, idx) => (
+                <li key={idx}>{abi}</li>
+              ))}
+            </ul>
           </ModalContainer>
         </ModalBackdrop>
       )}

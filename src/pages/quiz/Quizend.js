@@ -25,7 +25,7 @@ const Container = styled.div`
   a {
     width: 200px;
     height: 50px;
-    margin-bottom: 50px;
+    margin: 50px 0;
   }
 `;
 
@@ -34,7 +34,7 @@ const HomeBtn = styled.div`
   height: 50px;
   border-radius: 10px;
   line-height: 50px;
-  margin: 50px auto 0 auto;
+  /* margin: 50px auto 0 auto; */
   background-color: salmon;
 `;
 const Quizend = () => {

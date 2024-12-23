@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { designFont } from "../../GlobalStyled";
 import { Link, useNavigate } from "react-router-dom";
 import btn from "../home/imgs/btn.jpg";
+import { Helmet } from "react-helmet-async";
 
 const slideMessage = keyframes`
   0% {
@@ -124,9 +125,11 @@ const Field = styled.div`
 `;
 
 const ShadowImage = styled.img`
-  filter: brightness(0) contrast(1);
+  filter: ${({ isRevealed }) =>
+    isRevealed ? "none" : "brightness(0) contrast(1)"};
   width: 100%;
   height: auto;
+  transition: filter 0.5s ease;
 `;
 
 const userani = keyframes`
@@ -301,6 +304,7 @@ const Quiz = () => {
   const [roundResults, setRoundResults] = useState(
     Array(totalRounds).fill(null)
   );
+  const [isRevealed, setIsRevealed] = useState(false);
 
   const navigate = useNavigate();
 
@@ -357,11 +361,19 @@ const Quiz = () => {
     }
 
     setRoundResults(updatedResults);
-
     // 결과 메시지 표시
     setShowResult(true);
 
-    // 2.2초 뒤 다음 라운드(혹은 종료)
+    // 1) 먼저 포켓몬 원본 이미지 보여주기(필터 해제)
+    setIsRevealed(true);
+
+    // 2) 1초 뒤에 다시 필터 적용 (원하는 시간으로 조절 가능)
+    setTimeout(() => {
+      setIsRevealed(false);
+    }, 1000);
+
+    // 3) 2.2초 뒤 다음 라운드
+    //    (showResult도 종료하고, newRound 호출)
     setTimeout(() => {
       setShowResult(false);
       nextRound(updatedResults);
@@ -386,13 +398,20 @@ const Quiz = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>포켓몬 퀴즈</title>
+      </Helmet>
       <BattleWrap>
         <h1>{round}번째 퀴즈</h1>
         {showResult && <ResultMessage>{message}</ResultMessage>}
         <PokemonAniWrap>
           <PokemonImg>
             {pokemon ? (
-              <ShadowImage src={pokemon.image} alt="shadow-pokemon" />
+              <ShadowImage
+                src={pokemon.image}
+                alt="shadow-pokemon"
+                isRevealed={isRevealed}
+              />
             ) : (
               <p>로딩 중...</p>
             )}

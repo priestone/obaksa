@@ -6,6 +6,7 @@ import bg from "../home/imgs/bg.jpg";
 import btn from "../home/imgs/btn.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet-async";
 
 const Container = styled.div`
   max-width: 440px;
@@ -79,7 +80,8 @@ const NextBtn3 = styled.div`
     z-index: 100;
     position: absolute;
     top: 24%;
-    left: 24%;
+    left: 50%;
+    transform: translateX(-50%);
 
     &:hover + div {
       display: block;
@@ -91,7 +93,8 @@ const NextBtn3 = styled.div`
     z-index: 100;
     position: absolute;
     top: 56%;
-    left: 24%;
+    left: 50%;
+    transform: translateX(-50%);
 
     &:hover + div {
       display: block;
@@ -125,6 +128,9 @@ const Quizend = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>포켓몬 퀴즈결과과</title>
+      </Helmet>
       <h1>퀴즈 종료</h1>
       <p>당신은 총 {score}개의 문제를 맞췄습니다!</p>
       <NextBtn3>

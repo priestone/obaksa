@@ -5,6 +5,7 @@ import btn from "./imgs/btn.jpg";
 import { designFont } from "../../GlobalStyled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet-async";
 
 const Container = styled.div`
   max-width: 440px;
@@ -79,7 +80,8 @@ const NextBtn3 = styled.div`
     z-index: 100;
     position: absolute;
     top: 24%;
-    left: 24%;
+    left: 50%;
+    transform: translateX(-50%);
 
     &:hover + div {
       display: block;
@@ -91,7 +93,8 @@ const NextBtn3 = styled.div`
     z-index: 100;
     position: absolute;
     top: 56%;
-    left: 24%;
+    left: 50%;
+    transform: translateX(-50%);
 
     &:hover + div {
       display: block;
@@ -120,6 +123,9 @@ const Dot2 = styled.div`
 const Home = () => {
   return (
     <Container>
+      <Helmet>
+        <title>오박사의 포켓몬연구소</title>
+      </Helmet>
       <h1>
         오박사의 <br></br> 포켓몬 연구소
       </h1>

@@ -11,6 +11,8 @@ import {
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { MoonLoader } from "react-spinners";
+import { Helmet } from "react-helmet-async";
 
 const Container = styled.div`
   max-width: 440px;
@@ -167,6 +169,13 @@ const CloseButton = styled.button`
   font-size: 18px;
 `;
 
+const Loading = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 // -------------------- 타입 정보 --------------------
 const typeProperties = {
   grass: { color: "green", translation: "풀" },
@@ -218,6 +227,7 @@ const List = () => {
   const [pokemonDetails, setPokemonDetails] = useState({});
   const [searchPokemon, setSearchPokemon] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null); // 모달에 표시할 포켓몬
+  const [loading, setLoading] = useState(true);
 
   // List.jsx (일부)
   useEffect(() => {
@@ -263,8 +273,11 @@ const List = () => {
           return acc;
         }, {});
         setPokemonDetails(detailsMap);
+
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
 
@@ -295,43 +308,87 @@ const List = () => {
 
   console.log(pokemonDetails);
 
-  const fetchData = () => {
-    try {
-      // let page = (resultData.page += 1);
-    } catch (error) {}
-  };
-
   return (
     <Container>
+      <Helmet>
+        <title>포켓몬 도감</title>
+      </Helmet>
       <Link to={"/#"}>
         <Logo>오박사</Logo>
       </Link>
-      <SearchWrap>
-        <Search
-          placeholder="포켓몬 검색하기"
-          value={searchPokemon}
-          onChange={(e) => setSearchPokemon(e.target.value)}
-        />
-      </SearchWrap>
-      <ConWrap>
-        {filteredPokemonList.map((pokemon) => {
-          const detail = pokemonDetails[pokemon.id];
-          return (
-            <Con
-              key={pokemon.name}
-              onClick={() => handlePokemonClick(pokemon.id)} // 클릭 시 모달 열기
-            >
-              <Conimg>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-                  alt={pokemon.name}
-                />
-              </Conimg>
-              <h1>No.{pokemon.id}</h1>
-              <h2>{detail ? getKoreanName(detail.names) : "불러오는 중..."}</h2>
-              <Type>
-                {detail &&
-                  detail.types?.map((typeObj, i) => {
+
+      {/* 로딩 중일 때만 스피너 표시 */}
+      {loading ? (
+        <Loading>
+          <MoonLoader color="#36d7b7" loading={loading} size={50} />
+        </Loading>
+      ) : (
+        <>
+          <SearchWrap>
+            <Search
+              placeholder="포켓몬 검색하기"
+              value={searchPokemon}
+              onChange={(e) => setSearchPokemon(e.target.value)}
+            />
+          </SearchWrap>
+
+          <ConWrap>
+            {filteredPokemonList.map((pokemon) => {
+              const detail = pokemonDetails[pokemon.id];
+              return (
+                <Con
+                  key={pokemon.name}
+                  onClick={() => handlePokemonClick(pokemon.id)}
+                >
+                  <Conimg>
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                      alt={pokemon.name}
+                    />
+                  </Conimg>
+                  <h1>No.{pokemon.id}</h1>
+                  <h2>
+                    {detail ? getKoreanName(detail.names) : "불러오는 중..."}
+                  </h2>
+                  <Type>
+                    {detail &&
+                      detail.types?.map((typeObj, i) => {
+                        const { color, translation } = getPokemonTypeProperties(
+                          typeObj.type.name
+                        );
+                        return (
+                          <span
+                            key={i}
+                            style={{
+                              backgroundColor: color,
+                              color: color === "yellow" ? "black" : "white",
+                            }}
+                          >
+                            {translation}
+                          </span>
+                        );
+                      })}
+                  </Type>
+                </Con>
+              );
+            })}
+          </ConWrap>
+
+          {/* -------------------- 모달(선택된 포켓몬 정보) -------------------- */}
+          {selectedPokemon && (
+            <ModalBackdrop onClick={handleCloseModal}>
+              <ModalContainer onClick={(e) => e.stopPropagation()}>
+                <CloseButton onClick={handleCloseModal}>
+                  <FontAwesomeIcon icon={faXmark} />
+                </CloseButton>
+                <Modalimg>
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`}
+                    alt={getKoreanName(selectedPokemon.names)}
+                  />
+                </Modalimg>
+                <Type>
+                  {selectedPokemon.types?.map((typeObj, i) => {
                     const { color, translation } = getPokemonTypeProperties(
                       typeObj.type.name
                     );
@@ -347,58 +404,22 @@ const List = () => {
                       </span>
                     );
                   })}
-              </Type>
-            </Con>
-          );
-        })}
-      </ConWrap>
-
-      {/* -------------------- 모달(선택된 포켓몬 정보) -------------------- */}
-      {selectedPokemon && (
-        <ModalBackdrop onClick={handleCloseModal}>
-          {/* 
-            모달 내부 컨테이너 클릭 시 닫히지 않도록 
-            이벤트 버블링을 막아주는 코드가 필요. 
-          */}
-          <ModalContainer onClick={(e) => e.stopPropagation()}>
-            <CloseButton onClick={handleCloseModal}>
-              <FontAwesomeIcon icon={faXmark} />
-            </CloseButton>
-            <Modalimg>
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`}
-                alt={getKoreanName(selectedPokemon.names)}
-              />
-            </Modalimg>
-            <Type>
-              {selectedPokemon.types?.map((typeObj, i) => {
-                const { color, translation } = getPokemonTypeProperties(
-                  typeObj.type.name
-                );
-                return (
-                  <span
-                    key={i}
-                    style={{
-                      backgroundColor: color,
-                      color: color === "yellow" ? "black" : "white",
-                    }}
-                  >
-                    {translation}
-                  </span>
-                );
-              })}
-            </Type>
-            <h1>No.{selectedPokemon.id}</h1>
-            <h2>{getKoreanName(selectedPokemon.names)}</h2>
-            <p>설명: {getKoreanFlavor(selectedPokemon.flavor_text_entries)}</p>
-            <h3>특성</h3>
-            <ul>
-              {selectedPokemon.abilitiesKorean?.map((abi, idx) => (
-                <li key={idx}> - {abi}</li>
-              ))}
-            </ul>
-          </ModalContainer>
-        </ModalBackdrop>
+                </Type>
+                <h1>No.{selectedPokemon.id}</h1>
+                <h2>{getKoreanName(selectedPokemon.names)}</h2>
+                <p>
+                  설명: {getKoreanFlavor(selectedPokemon.flavor_text_entries)}
+                </p>
+                <h3>특성</h3>
+                <ul>
+                  {selectedPokemon.abilitiesKorean?.map((abi, idx) => (
+                    <li key={idx}> - {abi}</li>
+                  ))}
+                </ul>
+              </ModalContainer>
+            </ModalBackdrop>
+          )}
+        </>
       )}
     </Container>
   );

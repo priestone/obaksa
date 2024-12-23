@@ -1,32 +1,47 @@
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import nunu1 from "./imgs/nunu1.png";
-import nunu2 from "./imgs/nunu2.png";
-import gos1 from "./imgs/gos1.png";
-import gos2 from "./imgs/gos2.png";
-import bg1 from "./imgs/bg1.png";
-import bg2 from "./imgs/bg2.png";
+import bg from "./imgs/bg.jpg";
+import btn from "./imgs/btn.jpg";
+import { designFont } from "../../GlobalStyled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   max-width: 440px;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  /* padding: 100px 40px; */
-  /* background-color: #dbdbdb; */
   position: relative;
-  /* padding-top: 100px; */
+  background: url(${bg}) no-repeat center / cover;
+  /* background-size: 300px; */
 
   h1 {
     width: 240px;
     position: absolute;
-    top: 20%;
+    top: 24%;
     left: 50%;
     transform: translateX(-50%);
     font-size: 40px;
     font-weight: 900;
     text-align: center;
     z-index: 990;
+    line-height: 60px;
+    -webkit-text-stroke: 5px rgb(51, 51, 51);
+  }
+
+  h5 {
+    width: 240px;
+    position: absolute;
+    top: 24%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+    z-index: 991;
+    line-height: 60px;
+    color: white;
+    /* -webkit-text-stroke: 3px rgb(43, 43, 43); */
   }
 `;
 
@@ -43,138 +58,55 @@ const BtnWrap = styled.div`
   }
 `;
 
-const NextBtn1 = styled.div`
-  /* width: 150px; */
+const NextBtn3 = styled.div`
   width: 100%;
-  height: 150px;
-  border-radius: 10px;
-  /* background-color: salmon; */
-  /* background: url(${bg1}) no-repeat center / cover; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 200px;
   position: relative;
-  z-index: 20;
-  /* position: absolute;
-  left: 10%;
-  top: 50%; */
+  font-family: ${designFont.styleFont};
+
   img {
-    position: absolute;
-    top: 38%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 100%;
-    z-index: 10;
+    max-height: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
   }
 
   h2 {
-    z-index: 11;
-    text-align: center;
-  }
-`;
-
-const NextBtn2 = styled.div`
-  width: 100%;
-  height: 150px;
-  border-radius: 10px;
-  /* background-color: salmon; */
-  /* background: url(${bg2}) no-repeat center / cover; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* position: absolute;
-  right: 10%;
-  top: 50%; */
-  position: relative;
-  z-index: 20;
-  /* position: absolute;
-  left: 10%;
-  top: 50%; */
-  img {
+    font-size: 30px;
+    z-index: 100;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    z-index: 10;
+    top: 24%;
+    left: 24%;
   }
 
-  h2 {
-    z-index: 11;
-    text-align: center;
+  h3 {
+    font-size: 30px;
+    z-index: 100;
+    position: absolute;
+    top: 56%;
+    left: 24%;
   }
 `;
 
-const Nunu = styled.div`
-  width: 100px;
-  height: 100px;
-  position: relative;
-  top: 40%;
-  left: 10%;
-  overflow: hidden;
-`;
-
-const nunuani = keyframes`
-0% {
-  bottom: -91px;
-  }     
-50% {
-  bottom: 0px; 
-  }
-  100%{
-    bottom: -100px;
-  }
-`;
-
-const gosani1 = keyframes`
-0% {
-  right: -100px;
-  }     
-50% {
-  right: 0px; 
-  }
-  100%{
-    right: -100px;
-  }
-`;
-
-const Img1 = styled.img`
+const Dot1 = styled.div`
+  font-size: 24px;
   position: absolute;
-  width: 100%;
-  bottom: -91px;
-  animation: ${nunuani} 4s 2s alternate;
+  top: 24%;
+  left: 14%;
+  z-index: 200;
 `;
 
-const Img2 = styled.img`
+const Dot2 = styled.div`
+  font-size: 24px;
   position: absolute;
-  width: 100%;
-  bottom: -100px;
-  animation: ${nunuani} 4s 6s alternate;
-  /* animation-delay: 2s; // 2초 뒤에 반대 페이즈로 */
-`;
-
-const Gos = styled.div`
-  width: 100px;
-  height: 100px;
-  position: relative;
-  top: 5%;
-  left: 70%;
-  overflow: hidden;
-`;
-
-const Img3 = styled.img`
-  position: absolute;
-  width: 100%;
-  right: -100px;
-  animation: ${gosani1} 4s alternate;
-`;
-
-const Img4 = styled.img`
-  position: absolute;
-  width: 100%;
-  right: -100px;
-  animation: ${gosani1} 4s 4s alternate;
-  /* animation-delay: 2s; // 2초 뒤에 반대 페이즈로 */
+  top: 56%;
+  left: 14%;
+  z-index: 200;
 `;
 
 const Home = () => {
@@ -183,33 +115,25 @@ const Home = () => {
       <h1>
         오박사의 <br></br> 포켓몬 연구소
       </h1>
-      <Nunu>
-        <Img1 src={nunu1} alt="nunu1" />
-        <Img2 src={nunu2} alt="nunu2" />
-      </Nunu>
-      <Gos>
-        <Img3 src={gos1} alt="nunu1" />
-        <Img4 src={gos2} alt="nunu1" />
-      </Gos>
+      <h5>
+        오박사의 <br></br> 포켓몬 연구소
+      </h5>
       <BtnWrap>
-        <Link to={"/quiz"}>
-          <NextBtn1>
-            <img src={bg1} alt="bg1" />
-            <h2>
-              포켓몬<br></br>
-              퀴즈
-            </h2>
-          </NextBtn1>
-        </Link>
-        <Link to={"/list"}>
-          <NextBtn2>
-            <img src={bg2} alt="bg2" />
-            <h2>
-              포켓몬
-              <br></br>도감
-            </h2>
-          </NextBtn2>
-        </Link>
+        <NextBtn3>
+          <img src={btn} alt="버튼이미지" />
+          <Link to={"/quiz"}>
+            <Dot1>
+              <FontAwesomeIcon icon={faPlay} />
+            </Dot1>
+            <Dot2>
+              <FontAwesomeIcon icon={faPlay} />
+            </Dot2>
+            <h2>포켓몬 퀴즈</h2>
+          </Link>
+          <Link to={"/list"}>
+            <h3>포켓몬 도감</h3>
+          </Link>
+        </NextBtn3>
       </BtnWrap>
     </Container>
   );

@@ -5,6 +5,7 @@ import poketballimg from "./imgs/poketballimg.png";
 import { useEffect, useState } from "react";
 import { designFont } from "../../GlobalStyled";
 import { Link, useNavigate } from "react-router-dom";
+import btn from "../home/imgs/btn.jpg";
 
 const slideMessage = keyframes`
   0% {
@@ -137,14 +138,27 @@ const NoticeWrap = styled.div`
   border-radius: 10px;
   background-color: #dbdbdb;
   margin-top: 10px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  position: relative;
 
   h2 {
     text-align: start;
     line-height: 50px;
-    font-size: 24px;
+    font-size: 20px;
     font-family: ${designFont.styleFont};
     margin-left: 10px;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    z-index: 60;
+  }
+
+  img {
+    max-height: 120px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
   }
 `;
 
@@ -164,32 +178,66 @@ const ActionWrap = styled.div`
   margin-top: 10px;
   a {
     width: 48%;
-    border-radius: 10px;
-    border: 2px solid black;
   }
 `;
 
 const Write = styled.div`
   width: 48%;
   height: 100px;
-  background-color: #dbdbdb;
   text-align: center;
   line-height: 100px;
   font-size: 24px;
   font-family: ${designFont.styleFont};
   border-radius: 10px;
-  border: 2px solid black;
   cursor: pointer;
+  position: relative;
+
+  img {
+    max-height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-family: ${designFont.styleFont};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 60;
+  }
 `;
 
 const Runaway = styled.div`
   height: 100px;
-  background-color: #dbdbdb;
+  /* background-color: #dbdbdb; */
   text-align: center;
   line-height: 100px;
   font-size: 24px;
   font-family: ${designFont.styleFont};
   border-radius: 10px;
+  position: relative;
+
+  img {
+    max-height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-family: ${designFont.styleFont};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 60;
+  }
 `;
 
 const getKoreanName = (names) => {
@@ -326,6 +374,7 @@ const Quiz = () => {
       </BattleWrap>
       <TextWrap>
         <NoticeWrap>
+          <img src={btn} alt="버튼이미지" />
           <h2>
             앗! 야생의
             <br />
@@ -338,9 +387,15 @@ const Quiz = () => {
           </h2>
         </NoticeWrap>
         <ActionWrap>
-          <Write onClick={checkAnswer}>입력하기</Write>
+          <Write onClick={checkAnswer}>
+            <img src={btn} alt="버튼이미지" />
+            <h3>입력하기</h3>
+          </Write>
           <Link to={"/"}>
-            <Runaway>도망치기</Runaway>
+            <Runaway>
+              <img src={btn} alt="버튼이미지" />
+              <h3>도망치기</h3>
+            </Runaway>
           </Link>
         </ActionWrap>
       </TextWrap>

@@ -9,26 +9,32 @@ import {
   getAbilityData,
 } from "../../api";
 import { Link } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   max-width: 440px;
-  width: 100%;
+  width: 96%;
   min-height: 100vh;
   height: 100%;
   margin: 0 auto;
-  background-color: #dbdbdb;
+  /* background-color: #dbdbdb; */
   position: relative;
-  padding: 20px;
+  padding: 5% 2%;
+
+  a {
+    width: 100px;
+  }
 `;
 
 const Logo = styled.div`
   font-family: ${designFont.styleFont};
   font-size: 30px;
+  width: 100px;
 `;
 
 const SearchWrap = styled.div`
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 const Search = styled.input`
@@ -36,12 +42,12 @@ const Search = styled.input`
   box-sizing: border-box;
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding: 5px;
 `;
 
 const ConWrap = styled.div`
-  margin-top: 30px;
+  margin: 30px auto;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -99,6 +105,7 @@ const ModalBackdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(1px);
 `;
 
 const ModalContainer = styled.div`
@@ -112,12 +119,10 @@ const ModalContainer = styled.div`
 
   img {
     width: 70%;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
   }
 
   h1 {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 10px;
   }
 
@@ -131,6 +136,7 @@ const ModalContainer = styled.div`
     font-size: 16px;
     letter-spacing: 1px;
     line-height: 20px;
+    opacity: 0.6;
   }
 
   h3 {
@@ -138,6 +144,7 @@ const ModalContainer = styled.div`
   }
 
   li {
+    opacity: 0.6;
     margin-top: 10px;
   }
 `;
@@ -306,13 +313,6 @@ const List = () => {
           onChange={(e) => setSearchPokemon(e.target.value)}
         />
       </SearchWrap>
-      <InfiniteScroll
-        dataLength={pokemonList.length}
-        next={fetchData}
-        hasMore={true}
-      >
-        {console.log(pokemonList.length)}
-      </InfiniteScroll>
       <ConWrap>
         {filteredPokemonList.map((pokemon) => {
           const detail = pokemonDetails[pokemon.id];
@@ -361,7 +361,9 @@ const List = () => {
             이벤트 버블링을 막아주는 코드가 필요. 
           */}
           <ModalContainer onClick={(e) => e.stopPropagation()}>
-            <CloseButton onClick={handleCloseModal}>X</CloseButton>
+            <CloseButton onClick={handleCloseModal}>
+              <FontAwesomeIcon icon={faXmark} />
+            </CloseButton>
             <Modalimg>
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`}

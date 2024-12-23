@@ -4,5 +4,5 @@
 - [x] npm i react-router-dom
 - [x] npm i styled-reset
 - [x] npm i react-hook-form
+- [x] font-awesome
 - [] helmet-async
-- [] font-awesome

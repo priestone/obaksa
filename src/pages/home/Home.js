@@ -13,7 +13,6 @@ const Container = styled.div`
   margin: 0 auto;
   position: relative;
   background: url(${bg}) no-repeat center / cover;
-  /* background-size: 300px; */
 
   h1 {
     width: 240px;
@@ -41,7 +40,6 @@ const Container = styled.div`
     z-index: 991;
     line-height: 60px;
     color: white;
-    /* -webkit-text-stroke: 3px rgb(43, 43, 43); */
   }
 `;
 
@@ -82,6 +80,10 @@ const NextBtn3 = styled.div`
     position: absolute;
     top: 24%;
     left: 24%;
+
+    &:hover + div {
+      display: block;
+    }
   }
 
   h3 {
@@ -90,6 +92,10 @@ const NextBtn3 = styled.div`
     position: absolute;
     top: 56%;
     left: 24%;
+
+    &:hover + div {
+      display: block;
+    }
   }
 `;
 
@@ -99,6 +105,7 @@ const Dot1 = styled.div`
   top: 24%;
   left: 14%;
   z-index: 200;
+  display: none;
 `;
 
 const Dot2 = styled.div`
@@ -107,6 +114,7 @@ const Dot2 = styled.div`
   top: 56%;
   left: 14%;
   z-index: 200;
+  display: none;
 `;
 
 const Home = () => {
@@ -122,16 +130,16 @@ const Home = () => {
         <NextBtn3>
           <img src={btn} alt="버튼이미지" />
           <Link to={"/quiz"}>
+            <h2>포켓몬 퀴즈</h2>
             <Dot1>
               <FontAwesomeIcon icon={faPlay} />
             </Dot1>
-            <Dot2>
-              <FontAwesomeIcon icon={faPlay} />
-            </Dot2>
-            <h2>포켓몬 퀴즈</h2>
           </Link>
           <Link to={"/list"}>
             <h3>포켓몬 도감</h3>
+            <Dot2>
+              <FontAwesomeIcon icon={faPlay} />
+            </Dot2>
           </Link>
         </NextBtn3>
       </BtnWrap>

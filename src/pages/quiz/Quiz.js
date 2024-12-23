@@ -66,12 +66,48 @@ const ResultMessage = styled.div`
   z-index: 999;
 `;
 
+const pokemonani = keyframes`
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0%;
+  }
+`;
+
+const pokemonani2 = keyframes`
+  0% {
+
+    transform:translateY(0px)
+  }
+  50% {
+
+    transform:translateY(10px)
+    
+  }
+  100%{
+
+    transform:translateY(0px)
+  }
+`;
+
 const PokemonImg = styled.div`
   width: 250px;
   position: absolute;
-  right: 0;
+  right: -100%;
   top: 10%;
   z-index: 200;
+  animation: ${pokemonani} 0.7s 1s alternate forwards;
+`;
+
+const PokemonAniWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0%;
+  top: 5%;
+  overflow: hidden;
+  animation: ${pokemonani2} 3s 0.7s alternate infinite;
 `;
 
 const Field = styled.div`
@@ -93,11 +129,21 @@ const ShadowImage = styled.img`
   height: auto;
 `;
 
+const userani = keyframes`
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 0%;
+  }
+`;
+
 const UserImg = styled.div`
   width: 200px;
   position: absolute;
   bottom: 0;
   left: 0%;
+  animation: ${userani} 0.7s alternate;
 `;
 const Status = styled.div``;
 
@@ -343,13 +389,15 @@ const Quiz = () => {
       <BattleWrap>
         <h1>{round}번째 퀴즈</h1>
         {showResult && <ResultMessage>{message}</ResultMessage>}
-        <PokemonImg>
-          {pokemon ? (
-            <ShadowImage src={pokemon.image} alt="shadow-pokemon" />
-          ) : (
-            <p>로딩 중...</p>
-          )}
-        </PokemonImg>
+        <PokemonAniWrap>
+          <PokemonImg>
+            {pokemon ? (
+              <ShadowImage src={pokemon.image} alt="shadow-pokemon" />
+            ) : (
+              <p>로딩 중...</p>
+            )}
+          </PokemonImg>
+        </PokemonAniWrap>
         <Field></Field>
         <UserImg>
           <img src={userImg} alt="사용자이미지" />

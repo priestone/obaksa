@@ -64,11 +64,11 @@ const Con = styled.div`
   font-family: ${designFont.styleFont};
   cursor: pointer; /* 마우스 오버 시 클릭 가능하다는 UI 표시 */
 
-  h1 {
+  h2 {
     margin-top: 5px;
   }
 
-  h2 {
+  h3 {
     margin-top: 3px;
   }
 `;
@@ -77,7 +77,7 @@ const Conimg = styled.div`
   width: 100%;
   border-radius: 10px;
   background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const Type = styled.div`
@@ -112,6 +112,7 @@ const ModalBackdrop = styled.div`
 
 const ModalContainer = styled.div`
   /* 모달 내용(앞면) */
+  max-width: 440px;
   width: 70%;
   background: #fff;
   border-radius: 8px;
@@ -123,26 +124,27 @@ const ModalContainer = styled.div`
     width: 70%;
   }
 
-  h1 {
+  h2 {
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
-  h2 {
+  h3 {
     font-size: 18px;
     margin-top: 10px;
   }
 
   p {
-    margin: 10px 0;
+    margin: 20px 0 0 0;
     font-size: 16px;
     letter-spacing: 1px;
     line-height: 20px;
     opacity: 0.6;
   }
 
-  h3 {
+  h4 {
     font-size: 18px;
+    margin-top: 30px;
   }
 
   li {
@@ -346,10 +348,10 @@ const List = () => {
                       alt={pokemon.name}
                     />
                   </Conimg>
-                  <h1>No.{pokemon.id}</h1>
-                  <h2>
+                  <h2>No.{pokemon.id}</h2>
+                  <h3>
                     {detail ? getKoreanName(detail.names) : "불러오는 중..."}
-                  </h2>
+                  </h3>
                   <Type>
                     {detail &&
                       detail.types?.map((typeObj, i) => {
@@ -405,12 +407,12 @@ const List = () => {
                     );
                   })}
                 </Type>
-                <h1>No.{selectedPokemon.id}</h1>
-                <h2>{getKoreanName(selectedPokemon.names)}</h2>
+                <h2>No.{selectedPokemon.id}</h2>
+                <h3>{getKoreanName(selectedPokemon.names)}</h3>
                 <p>
                   설명: {getKoreanFlavor(selectedPokemon.flavor_text_entries)}
                 </p>
-                <h3>특성</h3>
+                <h4>특성</h4>
                 <ul>
                   {selectedPokemon.abilitiesKorean?.map((abi, idx) => (
                     <li key={idx}> - {abi}</li>

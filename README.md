@@ -1,7 +1,6 @@
 # 오박사
 
 ## 🔗 배포주소
-<<<<<<< HEAD
 
 https://priestone.github.io/obaksa/
 

@@ -11,10 +11,10 @@ https://priestone.github.io/obaksa/
 
 ## 🖼️ 사이트 이미지
 
-![alt 사이트이미지1](/public/readmeImg/obaksa.png)
-![alt 사이트이미지2](/public/readmeImg/obaksa2.png)
-![alt 사이트이미지3](/public/readmeImg/obaksa3.png)
-![alt 사이트이미지4](/public/readmeImg/obaksa4.png)
+![obaksa](https://github.com/user-attachments/assets/a5ec227f-8dc2-45b3-b834-5b202576f0b0)
+![obaksa2](https://github.com/user-attachments/assets/466f7884-b6e8-40db-8313-5f45a2c2b88a)
+![obaksa3](https://github.com/user-attachments/assets/633f521c-0435-4102-832f-5e1bb683a573)
+![obaksa4](https://github.com/user-attachments/assets/59b0e213-900e-4b5e-9474-6516e4826d2d)
 
 ## 📚 STACKS
 

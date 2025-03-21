@@ -129,14 +129,14 @@ const Quizend = () => {
   return (
     <Container>
       <Helmet>
-        <title>포켓몬 퀴즈결과과</title>
+        <title>포켓몬 퀴즈결과</title>
       </Helmet>
       <h1>퀴즈 종료</h1>
       <p>당신은 총 {score}개의 문제를 맞췄습니다!</p>
       <NextBtn3>
         <img src={btn} alt="버튼이미지" />
         <Link to={"/"}>
-          <h2>홈으로로</h2>
+          <h2>홈으로</h2>
           <Dot1>
             <FontAwesomeIcon icon={faPlay} />
           </Dot1>
